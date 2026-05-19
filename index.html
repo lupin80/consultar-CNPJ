@@ -1,11 +1,12 @@
+# Página Completa — Consulta Inteligente de CNPJ Premium
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Consulta Inteligente de CNPJ</title>
+  <title>Consulta Inteligente de CNPJ Premium</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,300 +16,215 @@
     rel="stylesheet"
   >
 
-  <!-- ✅ Cloudflare CDN (cdnjs) - Font Awesome -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    referrerpolicy="no-referrer"
   />
-  <!-- Fonte: cdnjs (Cloudflare) lista o Font Awesome 7.0.1 e o arquivo all.min.css -->
-  <!--  -->
 
   <style>
+
     :root {
-      --color-amber-flame: #ff5500;
-      --gradient-amber-flame:
-        linear-gradient(135deg, #ff5500 0%, #ff2d7b 50%, #ffaa00 100%);
-
-      --color-honey-glow: #ffb800;
-      --color-signal-blue: #0066ff;
-      --color-bright-blue: #338bff;
-      --color-pure-white: #ffffff;
-      --color-snow-gray: #f2f2f7;
-      --color-mist: #eaeaef;
-      --color-silver: #c8c8d0;
-      --color-pewter: #8e8e99;
-      --color-smoke: #5a5a65;
-      --color-charcoal: #1d1d2b;
-      --color-ink: #0a0a14;
-      --color-true-black: #000000;
-      --color-vivid-green: #00d26a;
-      --color-electric-magenta: #d916ff;
-      --color-alert-red: #ff2d55;
-      --color-vivid-purple: #7b2dff;
-      --color-hot-pink: #ff2d7b;
-      --color-cyan: #00d4ff;
-      --color-teal: #00c9a7;
-
-      --font-inter: 'Inter', system-ui, sans-serif;
-
-      --shadow-xl: rgba(10, 10, 20, 0.12) 0px 0px 40px 0px;
-
-      --shadow-vivid:
-        0 8px 32px rgba(255, 85, 0, 0.18),
-        0 2px 8px rgba(255, 45, 123, 0.12);
+      --bg: #f4f6fb;
+      --card: rgba(255,255,255,.88);
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #ff5500;
+      --secondary: #ff2d7b;
+      --blue: #0066ff;
+      --green: #00c853;
+      --purple: #7b2dff;
+      --border: rgba(0,0,0,.06);
+      --shadow: 0 10px 40px rgba(0,0,0,.08);
+      --gradient:
+        linear-gradient(135deg,#ff5500 0%,#ff2d7b 50%,#ffaa00 100%);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body.dark {
+      --bg: #09090f;
+      --card: rgba(18,18,28,.88);
+      --text: #f4f4f5;
+      --muted: #9ca3af;
+      --border: rgba(255,255,255,.06);
+      --shadow: 0 10px 40px rgba(0,0,0,.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       background:
-        radial-gradient(ellipse at top left, rgba(255, 85, 0, .18), transparent 40%),
-        radial-gradient(ellipse at bottom right, rgba(0, 102, 255, .15), transparent 40%),
-        radial-gradient(ellipse at 70% 50%, rgba(123, 45, 255, .08), transparent 50%),
-        radial-gradient(ellipse at 30% 80%, rgba(0, 210, 106, .06), transparent 40%),
-        var(--color-snow-gray);
-      font-family: var(--font-inter);
+        radial-gradient(circle at top left, rgba(255,85,0,.15), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(0,102,255,.12), transparent 30%),
+        var(--bg);
+
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
       min-height: 100vh;
       padding: 40px;
-      color: var(--color-ink);
+      transition: .3s;
     }
 
-    .container { max-width: 1400px; margin: auto; }
+    .container {
+      max-width: 1400px;
+      margin: auto;
+    }
 
     .main-card {
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid rgba(255, 255, 255, .5);
-      border-radius: 32px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border-radius: 30px;
       overflow: hidden;
-      backdrop-filter: blur(24px);
-      box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255, 255, 255, .6);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
     }
 
     .top {
       padding: 50px;
-      border-bottom: 1px solid rgba(0, 0, 0, .06);
-      position: relative;
-      overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    .top::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 85, 0, .14), transparent 70%);
-      pointer-events: none;
-    }
-
-    .top::after {
-      content: '';
-      position: absolute;
-      bottom: -50px;
-      left: 25%;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 102, 255, .10), transparent 70%);
-      pointer-events: none;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
     .logo {
       width: 74px;
       height: 74px;
-      border-radius: 22px;
-      background: var(--gradient-amber-flame);
-      background-size: 200% 200%;
-      animation: gradientShift 4s ease infinite;
+      border-radius: 20px;
+      background: var(--gradient);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 20px;
+      color: white;
       font-weight: 800;
-      margin-bottom: 26px;
-      box-shadow:
-        rgba(255, 85, 0, .35) 0px 14px 36px,
-        rgba(255, 45, 123, .18) 0px 6px 18px;
-      position: relative;
-      z-index: 2;
-      letter-spacing: -.5px;
+      font-size: 20px;
     }
 
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .theme-toggle {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
     }
 
     h1 {
-      font-size: 48px;
-      line-height: 52px;
-      letter-spacing: -1.5px;
+      font-size: 46px;
       margin-bottom: 14px;
-      position: relative;
-      z-index: 2;
-      background: linear-gradient(135deg, var(--color-ink) 0%, #2a2a4a 60%, var(--color-vivid-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      line-height: 52px;
     }
 
     .subtitle {
-      color: var(--color-smoke);
       max-width: 760px;
-      line-height: 30px;
-      font-size: 17px;
-      position: relative;
-      z-index: 2;
+      color: var(--muted);
+      line-height: 28px;
+      font-size: 16px;
     }
 
     .search-area {
       display: flex;
       gap: 16px;
-      margin-top: 36px;
+      margin-top: 34px;
       flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
     }
 
     .input-wrapper {
-      flex: 1;
-      min-width: 280px;
       position: relative;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
     }
 
     .input-wrapper input {
       width: 100%;
       height: 66px;
-      outline: none;
       border-radius: 100px;
-      background: rgba(255, 255, 255, .92);
-      border: 2px solid var(--color-silver);
-      padding: 0 24px 0 58px;
+      border: 2px solid var(--border);
+      background: rgba(255,255,255,.9);
+      padding: 0 24px 0 56px;
       font-size: 16px;
-      font-family: var(--font-inter);
-      transition: all .3s cubic-bezier(.4, 0, .2, 1);
+      outline: none;
     }
 
-    .input-wrapper input:focus {
-      border-color: var(--color-signal-blue);
-      background: #fff;
-      box-shadow:
-        rgba(0, 102, 255, .22) 0px 0px 0px 6px,
-        rgba(0, 102, 255, .08) 0px 10px 28px;
-    }
-
-    .icon {
-      position: absolute;
-      left: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--color-amber-flame);
-      font-size: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    body.dark .input-wrapper input {
+      background: rgba(255,255,255,.05);
+      color: white;
     }
 
     button {
       height: 66px;
       border: none;
       border-radius: 100px;
-      padding: 0 32px;
-      font-size: 15px;
-      font-weight: 700;
+      padding: 0 28px;
       cursor: pointer;
-      font-family: var(--font-inter);
-      transition: all .3s cubic-bezier(.4, 0, .2, 1);
-      display: inline-flex;
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
-      white-space: nowrap;
     }
 
     #btnConsultar {
-      background: var(--gradient-amber-flame);
-      background-size: 200% 200%;
-      animation: gradientShift 4s ease infinite;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      box-shadow:
-        rgba(255, 85, 0, .35) 0px 14px 36px,
-        rgba(255, 45, 123, .15) 0px 6px 16px;
+      background: var(--gradient);
+      color: white;
     }
-
-    #btnConsultar:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow:
-        rgba(255, 85, 0, .45) 0px 18px 44px,
-        rgba(255, 45, 123, .22) 0px 8px 22px;
-    }
-
-    #btnConsultar:active { transform: translateY(0) scale(.97); }
 
     .secondary-btn {
-      background: rgba(255, 255, 255, .92);
-      border: 2px solid var(--color-silver) !important;
-      color: var(--color-charcoal);
-    }
-
-    .secondary-btn:hover {
-      background: #fff;
-      border-color: var(--color-signal-blue) !important;
-      color: var(--color-signal-blue);
-      box-shadow: rgba(0, 102, 255, .12) 0px 10px 28px;
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text);
     }
 
     .loading {
       display: none;
-      text-align: center;
-      padding: 80px 30px;
+      padding: 60px;
     }
 
-    .loader {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      border: 5px solid rgba(0, 0, 0, .07);
-      border-top-color: var(--color-amber-flame);
-      border-right-color: var(--color-hot-pink);
-      margin: 0 auto 22px;
-      animation: spin .75s linear infinite;
+    .skeleton {
+      height: 22px;
+      border-radius: 8px;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.2),
+        rgba(255,255,255,.08)
+      );
+      background-size: 300% 100%;
+      animation: shimmer 1.2s infinite;
+      margin-bottom: 14px;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .loading h3 {
-      font-size: 18px;
-      background: linear-gradient(135deg, var(--color-amber-flame), var(--color-hot-pink), var(--color-vivid-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    @keyframes shimmer {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
     }
 
     .error {
       display: none;
       margin: 30px;
-      background: linear-gradient(135deg, rgba(255, 45, 85, .09), rgba(255, 45, 85, .03));
-      border: 2px solid rgba(255, 45, 85, .28);
-      color: var(--color-alert-red);
-      padding: 20px 26px;
-      border-radius: 20px;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255,45,85,.12);
+      color: #ff2d55;
       font-weight: 600;
-      font-size: 15px;
-    }
-
-    .error strong {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .result {
@@ -316,327 +232,179 @@
       padding: 40px;
     }
 
-    .company-banner {
-      background: linear-gradient(135deg, #07071a 0%, #141438 35%, #0d2e52 65%, #071422 100%);
+    .banner {
+      background:
+        linear-gradient(135deg,#09090f 0%,#12122c 50%,#003b7a 100%);
       color: white;
-      border-radius: 30px;
-      padding: 46px;
+      padding: 40px;
+      border-radius: 28px;
       margin-bottom: 30px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .06);
     }
 
-    .company-banner::before {
-      content: '';
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 85, 0, .18), transparent 65%);
-      left: -140px;
-      bottom: -140px;
-      pointer-events: none;
-    }
-
-    .company-banner::after {
-      content: '';
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 102, 255, .14), transparent 65%);
-      right: -100px;
-      top: -100px;
-      pointer-events: none;
-    }
-
-    .banner-accent {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(123, 45, 255, .10), transparent 65%);
-      right: 30%;
-      top: -60px;
-      pointer-events: none;
-    }
-
-    .company-banner h2 {
+    .banner h2 {
       font-size: 38px;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 2;
-      letter-spacing: -.5px;
+      margin-bottom: 10px;
     }
 
-    .company-banner p {
-      color: rgba(255, 255, 255, .55);
-      margin-bottom: 22px;
-      position: relative;
-      z-index: 2;
-      font-size: 15px;
+    .banner p {
+      opacity: .7;
+      margin-bottom: 24px;
     }
 
     .badges {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
+      gap: 12px;
     }
 
     .badge {
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 100px;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: .3px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
     }
 
-    .badge-success {
-      background: rgba(0, 230, 118, .14);
-      border: 1px solid rgba(0, 230, 118, .35);
-      color: #00e676;
-      box-shadow: 0 0 24px rgba(0, 230, 118, .12);
+    .success {
+      background: rgba(0,200,83,.18);
+      color: #00ff8c;
     }
 
-    .badge-danger {
-      background: rgba(255, 45, 85, .14);
-      border: 1px solid rgba(255, 45, 85, .35);
-      color: #ff5277;
-      box-shadow: 0 0 24px rgba(255, 45, 85, .12);
+    .danger {
+      background: rgba(255,45,85,.18);
+      color: #ff7b96;
     }
 
-    .badge-blue {
-      background: rgba(0, 102, 255, .14);
-      border: 1px solid rgba(0, 102, 255, .30);
-      color: #4da6ff;
-      box-shadow: 0 0 24px rgba(0, 102, 255, .12);
+    .blue {
+      background: rgba(0,102,255,.18);
+      color: #6fb1ff;
     }
 
-    .badge-purple {
-      background: rgba(123, 45, 255, .14);
-      border: 1px solid rgba(123, 45, 255, .30);
-      color: #a77bff;
-      box-shadow: 0 0 24px rgba(123, 45, 255, .10);
+    .purple {
+      background: rgba(123,45,255,.18);
+      color: #b799ff;
     }
 
-    .info-grid {
+    .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .stat small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .stat strong {
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
       gap: 20px;
     }
 
-    .info-card {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, .06);
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 26px;
-      transition: all .3s cubic-bezier(.4, 0, .2, 1);
-      position: relative;
-      overflow: hidden;
+      padding: 24px;
+      transition: .3s;
     }
 
-    .info-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      border-radius: 4px 0 0 4px;
-      background: var(--gradient-amber-flame);
-      opacity: 0;
-      transition: opacity .3s ease;
-    }
-
-    .info-card:hover {
+    .card:hover {
       transform: translateY(-5px);
-      box-shadow:
-        rgba(16, 16, 16, .08) 0px 14px 32px,
-        rgba(255, 85, 0, .05) 0px 6px 20px;
-      border-color: rgba(255, 85, 0, .12);
     }
 
-    .info-card:hover::before { opacity: 1; }
-
-    .info-card:nth-child(1)  .label { color: var(--color-amber-flame); }
-    .info-card:nth-child(2)  .label { color: var(--color-vivid-green); }
-    .info-card:nth-child(3)  .label { color: var(--color-signal-blue); }
-    .info-card:nth-child(4)  .label { color: var(--color-hot-pink); }
-    .info-card:nth-child(5)  .label { color: var(--color-vivid-purple); }
-    .info-card:nth-child(6)  .label { color: var(--color-teal); }
-    .info-card:nth-child(7)  .label { color: var(--color-honey-glow); }
-    .info-card:nth-child(8)  .label { color: var(--color-cyan); }
-    .info-card:nth-child(9)  .label { color: var(--color-electric-magenta); }
-    .info-card:nth-child(10) .label { color: var(--color-signal-blue); }
-
-    .info-card:nth-child(1)::before  { background: linear-gradient(180deg, #ff5500, #ffaa00); }
-    .info-card:nth-child(2)::before  { background: linear-gradient(180deg, #00d26a, #00e676); }
-    .info-card:nth-child(3)::before  { background: linear-gradient(180deg, #0066ff, #00d4ff); }
-    .info-card:nth-child(4)::before  { background: linear-gradient(180deg, #ff2d7b, #ff5500); }
-    .info-card:nth-child(5)::before  { background: linear-gradient(180deg, #7b2dff, #d916ff); }
-    .info-card:nth-child(6)::before  { background: linear-gradient(180deg, #00c9a7, #00d4ff); }
-    .info-card:nth-child(7)::before  { background: linear-gradient(180deg, #ffb800, #ff5500); }
-    .info-card:nth-child(8)::before  { background: linear-gradient(180deg, #00d4ff, #0066ff); }
-    .info-card:nth-child(9)::before  { background: linear-gradient(180deg, #d916ff, #ff2d7b); }
-    .info-card:nth-child(10)::before { background: linear-gradient(180deg, #0066ff, #00c9a7); }
+    .card.full {
+      grid-column: 1 / -1;
+    }
 
     .label {
       font-size: 12px;
-      text-transform: uppercase;
-      color: var(--color-pewter);
-      margin-bottom: 10px;
       font-weight: 800;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
     }
 
     .value {
-      font-size: 15px;
       line-height: 1.7;
       font-weight: 600;
       word-break: break-word;
-      color: var(--color-charcoal);
     }
 
-    .full { grid-column: 1 / -1; }
-
-    .socio-item {
-      background: linear-gradient(135deg, rgba(255, 255, 255, .85), var(--color-snow-gray));
-      border: 1px solid rgba(0, 0, 0, .06);
-      border-left: 4px solid var(--color-signal-blue);
-      border-radius: 18px;
-      padding: 20px;
+    .socio {
+      background: rgba(255,255,255,.04);
+      border-left: 4px solid var(--blue);
+      padding: 16px;
+      border-radius: 14px;
       margin-bottom: 12px;
-      transition: all .25s ease;
     }
 
-    .socio-item:hover {
-      border-left-color: var(--color-vivid-purple);
-      box-shadow: 0 6px 20px rgba(0, 102, 255, .08);
-      transform: translateX(4px);
+    .history {
+      margin-top: 30px;
     }
 
-    .socio-nome {
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--color-ink);
-      font-size: 15px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .history h3 {
+      margin-bottom: 16px;
     }
 
-    .socio-qual { color: var(--color-smoke); font-size: 14px; }
-
-    .stats-bar {
+    .history-list {
       display: flex;
-      gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .stat-chip {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      background: rgba(255, 255, 255, .7);
-      border: 1px solid rgba(0, 0, 0, .06);
-      border-radius: 16px;
-      padding: 14px 20px;
-      backdrop-filter: blur(8px);
     }
 
-    .stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
-
-    .stat-icon.orange { background: rgba(255, 85, 0, .12); color: var(--color-amber-flame); }
-    .stat-icon.blue   { background: rgba(0, 102, 255, .12); color: var(--color-signal-blue); }
-    .stat-icon.green  { background: rgba(0, 210, 106, .12); color: var(--color-vivid-green); }
-    .stat-icon.purple { background: rgba(123, 45, 255, .12); color: var(--color-vivid-purple); }
-
-    .stat-text { font-size: 13px; font-weight: 700; color: var(--color-smoke); }
-
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 13px;
-      padding: 22px 0;
-      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .03), transparent);
-      border-radius: 16px;
-      color: var(--color-pewter);
-    }
-
-    .footer .dot {
-      background: linear-gradient(135deg, var(--color-amber-flame), var(--color-hot-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 800;
-    }
-
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--color-amber-flame), var(--color-hot-pink));
+    .history-item {
+      padding: 10px 16px;
       border-radius: 100px;
+      background: rgba(255,255,255,.08);
+      cursor: pointer;
+      border: 1px solid var(--border);
     }
 
-    ::selection { background: rgba(255, 85, 0, .18); color: var(--color-ink); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    a.map-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
     }
 
-    .animate-in { animation: fadeUp .5s ease forwards; }
-    .animate-in:nth-child(1)  { animation-delay: .05s; }
-    .animate-in:nth-child(2)  { animation-delay: .10s; }
-    .animate-in:nth-child(3)  { animation-delay: .15s; }
-    .animate-in:nth-child(4)  { animation-delay: .20s; }
-    .animate-in:nth-child(5)  { animation-delay: .25s; }
-    .animate-in:nth-child(6)  { animation-delay: .30s; }
-    .animate-in:nth-child(7)  { animation-delay: .35s; }
-    .animate-in:nth-child(8)  { animation-delay: .40s; }
-    .animate-in:nth-child(9)  { animation-delay: .45s; }
-    .animate-in:nth-child(10) { animation-delay: .50s; }
+    @media(max-width:768px){
 
-    @media (max-width: 768px) {
-      body { padding: 14px; }
-      .top, .result { padding: 24px; }
-      h1 { font-size: 32px; line-height: 36px; }
-      button { width: 100%; }
-      .company-banner { padding: 28px; }
-      .company-banner h2 { font-size: 24px; }
-      .stats-bar { flex-direction: column; }
-    }
+      body {
+        padding: 14px;
+      }
 
-    @media print {
-      body { background: #fff !important; padding: 20px !important; }
-      .main-card { box-shadow: none !important; border: none !important; backdrop-filter: none !important; }
-      .search-area, .loading, .stats-bar { display: none !important; }
-      .info-card::before { opacity: 1 !important; }
-      .company-banner {
-        color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+      .top,
+      .result {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 34px;
+        line-height: 40px;
+      }
+
+      button {
+        width: 100%;
+        justify-content: center;
       }
     }
+
   </style>
-
 </head>
-
 <body>
 
 <div class="container">
@@ -645,38 +413,50 @@
 
     <div class="top">
 
-      <div class="logo">CNPJ</div>
+      <div class="topbar">
+
+        <div class="logo">CNPJ</div>
+
+        <button class="theme-toggle" id="toggleTheme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+      </div>
 
       <h1>Consulta Inteligente de Empresas</h1>
 
       <p class="subtitle">
-        Plataforma corporativa moderna para consulta empresarial completa via CNPJ.
-        Dados atualizados em tempo real da Receita Federal.
+        Plataforma corporativa premium para consultas empresariais em tempo real.
       </p>
 
       <div class="search-area">
 
         <div class="input-wrapper">
-          <span class="icon" aria-hidden="true">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
+
+          <i class="fa-solid fa-magnifying-glass"></i>
 
           <input
             type="text"
             id="cnpj"
-            placeholder="Digite o CNPJ — ex: 00.000.000/0001-00"
+            placeholder="Digite o CNPJ"
             maxlength="18"
           />
+
         </div>
 
-        <button id="btnConsultar" type="button">
+        <button id="btnConsultar">
           <i class="fa-solid fa-rocket"></i>
-          Consultar Empresa
+          Consultar
         </button>
 
-        <button id="btnPDF" class="secondary-btn" type="button">
+        <button class="secondary-btn" id="btnPDF">
           <i class="fa-solid fa-file-pdf"></i>
-          Gerar PDF
+          PDF
+        </button>
+
+        <button class="secondary-btn" id="btnJSON">
+          <i class="fa-solid fa-code"></i>
+          JSON
         </button>
 
       </div>
@@ -684,98 +464,120 @@
     </div>
 
     <div class="loading" id="loading">
-      <div class="loader"></div>
-      <h3>Consultando empresa...</h3>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
     </div>
 
     <div class="error" id="error"></div>
 
     <div class="result" id="result">
 
-      <div class="stats-bar" id="statsBar">
-        <div class="stat-chip">
-          <div class="stat-icon orange" aria-hidden="true"><i class="fa-solid fa-building"></i></div>
-          <span class="stat-text" id="statPorte">-</span>
+      <div class="stats">
+
+        <div class="stat">
+          <small>Porte</small>
+          <strong id="statPorte">-</strong>
         </div>
-        <div class="stat-chip">
-          <div class="stat-icon blue" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div>
-          <span class="stat-text" id="statUF">-</span>
+
+        <div class="stat">
+          <small>UF</small>
+          <strong id="statUF">-</strong>
         </div>
-        <div class="stat-chip">
-          <div class="stat-icon green" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></div>
-          <span class="stat-text" id="statAbertura">-</span>
+
+        <div class="stat">
+          <small>Abertura</small>
+          <strong id="statAbertura">-</strong>
         </div>
-        <div class="stat-chip">
-          <div class="stat-icon purple" aria-hidden="true"><i class="fa-solid fa-sack-dollar"></i></div>
-          <span class="stat-text" id="statCapital">-</span>
+
+        <div class="stat">
+          <small>Capital</small>
+          <strong id="statCapital">-</strong>
         </div>
+
       </div>
 
-      <div class="company-banner">
-        <div class="banner-accent"></div>
+      <div class="banner">
+
         <h2 id="razaoSocial">-</h2>
+
         <p id="nomeFantasia">-</p>
+
         <div class="badges" id="badges"></div>
+
       </div>
 
-      <div class="info-grid" id="infoGrid">
+      <div class="grid">
 
-        <div class="info-card">
+        <div class="card">
           <div class="label">CNPJ</div>
           <div class="value" id="cnpjInfo"></div>
         </div>
 
-        <div class="info-card">
-          <div class="label">Situação Cadastral</div>
+        <div class="card">
+          <div class="label">Situação</div>
           <div class="value" id="situacao"></div>
         </div>
 
-        <div class="info-card">
+        <div class="card">
           <div class="label">Telefone</div>
           <div class="value" id="telefone"></div>
         </div>
 
-        <div class="info-card">
+        <div class="card">
           <div class="label">E-mail</div>
           <div class="value" id="email"></div>
         </div>
 
-        <div class="info-card">
+        <div class="card">
           <div class="label">Capital Social</div>
           <div class="value" id="capitalSocial"></div>
         </div>
 
-        <div class="info-card">
+        <div class="card">
           <div class="label">Natureza Jurídica</div>
           <div class="value" id="naturezaJuridica"></div>
         </div>
 
-        <div class="info-card">
-          <div class="label">Porte da Empresa</div>
-          <div class="value" id="porteEmpresa"></div>
+        <div class="card">
+          <div class="label">CNAE Principal</div>
+          <div class="value" id="cnaePrincipal"></div>
         </div>
 
-        <div class="info-card">
+        <div class="card">
+          <div class="label">Tempo de Empresa</div>
+          <div class="value" id="tempoEmpresa"></div>
+        </div>
+
+        <div class="card">
           <div class="label">Data de Abertura</div>
           <div class="value" id="dataAbertura"></div>
         </div>
 
-        <div class="info-card full">
-          <div class="label">Endereço Completo</div>
+        <div class="card full">
+          <div class="label">Endereço</div>
           <div class="value" id="endereco"></div>
         </div>
 
-        <div class="info-card full">
+        <div class="card full">
+          <div class="label">CNAEs Secundários</div>
+          <div class="value" id="cnaesSecundarios"></div>
+        </div>
+
+        <div class="card full">
           <div class="label">Quadro Societário</div>
           <div class="value" id="socios"></div>
         </div>
 
       </div>
 
-      <div class="footer">
-        <span class="dot">●</span>
-        Sistema interno corporativo • Consulta via API pública CNPJ WS
-        <span class="dot">●</span>
+      <div class="history">
+
+        <h3>Últimas Consultas</h3>
+
+        <div class="history-list" id="historyList"></div>
+
       </div>
 
     </div>
@@ -785,153 +587,338 @@
 </div>
 
 <script>
-  const input  = document.getElementById('cnpj');
-  const button = document.getElementById('btnConsultar');
+
+  const input = document.getElementById('cnpj');
+  const btnConsultar = document.getElementById('btnConsultar');
   const btnPDF = document.getElementById('btnPDF');
+  const btnJSON = document.getElementById('btnJSON');
+  const toggleTheme = document.getElementById('toggleTheme');
+
+  let ultimoResultado = null;
+
+  toggleTheme.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+  });
 
   input.addEventListener('input', (e) => {
+
     let v = e.target.value.replace(/\D/g, '');
+
     v = v.replace(/^(\d{2})(\d)/, '$1.$2');
     v = v.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
     v = v.replace(/\.(\d{3})(\d)/, '.$1/$2');
     v = v.replace(/(\d{4})(\d)/, '$1-$2');
+
     e.target.value = v;
+
+    if (v.replace(/\D/g, '').length === 14) {
+      consultarCNPJ();
+    }
   });
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') consultarCNPJ();
   });
 
-  button.addEventListener('click', consultarCNPJ);
-  btnPDF.addEventListener('click', imprimirPDF);
+  btnConsultar.addEventListener('click', consultarCNPJ);
+
+  btnPDF.addEventListener('click', () => {
+    window.print();
+  });
+
+  btnJSON.addEventListener('click', exportarJSON);
 
   function showError(msg) {
-    const el = document.getElementById('error');
-    el.style.display = 'block';
-    el.innerHTML = `<strong><i class="fa-solid fa-triangle-exclamation"></i> Erro:</strong> ${msg}`;
+
+    const error = document.getElementById('error');
+
+    error.style.display = 'block';
+
+    error.innerHTML = `
+      <i class="fa-solid fa-circle-exclamation"></i>
+      ${msg}
+    `;
   }
 
   function hideError() {
     document.getElementById('error').style.display = 'none';
   }
 
+  function formatarData(data) {
+
+    if (!data) return '-';
+
+    const partes = data.split('-');
+
+    if (partes.length !== 3) return data;
+
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+  }
+
+  function calcularTempoEmpresa(data) {
+
+    if (!data) return '-';
+
+    const abertura = new Date(data);
+    const hoje = new Date();
+
+    return `${hoje.getFullYear() - abertura.getFullYear()} anos`;
+  }
+
+  function salvarHistorico(cnpj) {
+
+    let lista = JSON.parse(localStorage.getItem('historicoCNPJ')) || [];
+
+    lista = lista.filter(item => item !== cnpj);
+
+    lista.unshift(cnpj);
+
+    lista = lista.slice(0, 10);
+
+    localStorage.setItem('historicoCNPJ', JSON.stringify(lista));
+
+    renderizarHistorico();
+  }
+
+  function renderizarHistorico() {
+
+    const lista = JSON.parse(localStorage.getItem('historicoCNPJ')) || [];
+
+    document.getElementById('historyList').innerHTML =
+      lista.map(cnpj => `
+
+        <div class="history-item" onclick="consultarHistorico('${cnpj}')">
+          ${cnpj}
+        </div>
+
+      `).join('');
+  }
+
+  function consultarHistorico(cnpj) {
+    input.value = cnpj;
+    consultarCNPJ();
+  }
+
   async function consultarCNPJ() {
+
     hideError();
 
     const loading = document.getElementById('loading');
-    const result  = document.getElementById('result');
-
-    result.style.display = 'none';
+    const result = document.getElementById('result');
 
     let cnpj = input.value.replace(/\D/g, '');
 
     if (cnpj.length !== 14) {
-      showError('Digite um CNPJ válido com 14 dígitos.');
+      showError('Digite um CNPJ válido.');
       return;
     }
 
     loading.style.display = 'block';
-    button.disabled = true;
+    result.style.display = 'none';
 
     try {
-      const res = await fetch(`https://publica.cnpj.ws/cnpj/${cnpj}`);
 
-      if (res.status === 404) throw new Error('CNPJ não encontrado na base da Receita Federal.');
-      if (res.status === 429) throw new Error('Limite de requisições excedido. Aguarde alguns segundos e tente novamente.');
-      if (!res.ok)            throw new Error('Erro inesperado ao consultar a empresa.');
+      const response = await fetch(
+        `https://publica.cnpj.ws/cnpj/${cnpj}`
+      );
 
-      const data = await res.json();
+      if (!response.ok) {
+        throw new Error('Erro ao consultar empresa.');
+      }
+
+      const data = await response.json();
+
+      ultimoResultado = data;
 
       preencherDados(data);
 
+      salvarHistorico(cnpj);
+
       result.style.display = 'block';
 
-      document.querySelectorAll('#infoGrid .info-card').forEach((card) => {
-        card.classList.remove('animate-in');
-        void card.offsetWidth; /* force reflow */
-        card.classList.add('animate-in');
-      });
-
     } catch (err) {
+
       showError(err.message);
+
     } finally {
+
       loading.style.display = 'none';
-      button.disabled = false;
     }
   }
 
   function preencherDados(data) {
+
     const est = data.estabelecimento || {};
 
-    document.getElementById('razaoSocial').innerText   = data.razao_social || '-';
-    document.getElementById('nomeFantasia').innerText  = est.nome_fantasia || 'Nome fantasia não informado';
-    document.getElementById('cnpjInfo').innerText      = est.cnpj || '-';
-    document.getElementById('situacao').innerText      = est.situacao_cadastral || '-';
-    document.getElementById('telefone').innerText      = est.telefone1 || '-';
-    document.getElementById('email').innerText         = est.email || '-';
+    const dataFormatada = formatarData(est.data_inicio_atividade);
+
+    const tempoEmpresa = calcularTempoEmpresa(est.data_inicio_atividade);
+
+    document.getElementById('razaoSocial').innerText =
+      data.razao_social || '-';
+
+    document.getElementById('nomeFantasia').innerText =
+      est.nome_fantasia || 'Nome fantasia não informado';
+
+    document.getElementById('cnpjInfo').innerHTML = `
+      ${est.cnpj || '-'}
+      <br><br>
+      <button onclick="copiarTexto('${est.cnpj || ''}')">
+        Copiar
+      </button>
+    `;
+
+    document.getElementById('situacao').innerText =
+      est.situacao_cadastral || '-';
+
+    document.getElementById('telefone').innerHTML = `
+      ${est.telefone1 || '-'}
+      <br><br>
+      <button onclick="copiarTexto('${est.telefone1 || ''}')">
+        Copiar
+      </button>
+    `;
+
+    document.getElementById('email').innerText =
+      est.email || '-';
 
     const capital = data.capital_social
-      ? `R$ ${Number(data.capital_social).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+      ? `R$ ${Number(data.capital_social).toLocaleString('pt-BR', {
+          minimumFractionDigits: 2
+        })}`
       : '-';
 
-    document.getElementById('capitalSocial').innerText    = capital;
-    document.getElementById('naturezaJuridica').innerText = data.natureza_juridica?.descricao || '-';
-    document.getElementById('porteEmpresa').innerText     = data.porte?.descricao || '-';
-    document.getElementById('dataAbertura').innerText     = est.data_inicio_atividade || '-';
+    document.getElementById('capitalSocial').innerText = capital;
 
-    document.getElementById('endereco').innerText =
-      `${est.tipo_logradouro || ''} ${est.logradouro || ''}, ${est.numero || 'S/N'} ` +
-      `- ${est.bairro || ''} - ${est.cidade?.nome || ''} / ${est.estado?.sigla || ''} ` +
-      `- CEP: ${est.cep || ''}`;
+    document.getElementById('naturezaJuridica').innerText =
+      data.natureza_juridica?.descricao || '-';
 
-    document.getElementById('statPorte').innerText    = data.porte?.descricao || '-';
-    document.getElementById('statUF').innerText       = est.estado?.sigla || '--';
-    document.getElementById('statAbertura').innerText = est.data_inicio_atividade || '-';
-    document.getElementById('statCapital').innerText  = capital;
+    document.getElementById('cnaePrincipal').innerText =
+      est.atividade_principal
+        ? `${est.atividade_principal.id} - ${est.atividade_principal.descricao}`
+        : '-';
 
-    const ativo = est.situacao_cadastral?.toLowerCase().includes('ativa');
+    document.getElementById('tempoEmpresa').innerText = tempoEmpresa;
+
+    document.getElementById('dataAbertura').innerText = dataFormatada;
+
+    const enderecoCompleto = `
+      ${est.tipo_logradouro || ''} ${est.logradouro || ''},
+      ${est.numero || 'S/N'} - ${est.bairro || ''}
+      - ${est.cidade?.nome || ''}/${est.estado?.sigla || ''}
+    `;
+
+    document.getElementById('endereco').innerHTML = `
+
+      <a
+        class="map-link"
+        href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoCompleto)}"
+        target="_blank"
+      >
+        ${enderecoCompleto}
+      </a>
+
+    `;
+
+    document.getElementById('cnaesSecundarios').innerHTML =
+      est.atividades_secundarias?.length
+        ? est.atividades_secundarias.map(cnae => `
+            <div style="margin-bottom:10px">
+              ${cnae.id} - ${cnae.descricao}
+            </div>
+          `).join('')
+        : '-';
+
+    document.getElementById('statPorte').innerText =
+      data.porte?.descricao || '-';
+
+    document.getElementById('statUF').innerText =
+      est.estado?.sigla || '-';
+
+    document.getElementById('statAbertura').innerText =
+      dataFormatada;
+
+    document.getElementById('statCapital').innerText = capital;
+
+    const ativo =
+      est.situacao_cadastral?.toLowerCase().includes('ativa');
+
+    const premium =
+      data.capital_social > 1000000;
 
     document.getElementById('badges').innerHTML = `
-      <div class="badge ${ativo ? 'badge-success' : 'badge-danger'}">
-        <i class="fa-solid ${ativo ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+
+      <div class="badge ${ativo ? 'success' : 'danger'}">
         ${est.situacao_cadastral || '-'}
       </div>
 
-      <div class="badge badge-blue">
-        <i class="fa-solid fa-location-dot"></i>
+      <div class="badge blue">
         ${est.estado?.sigla || '--'}
       </div>
 
-      <div class="badge badge-purple">
-        <i class="fa-solid fa-building"></i>
+      <div class="badge purple">
         ${data.porte?.descricao || '-'}
       </div>
+
+      ${premium ? `
+        <div class="badge success">
+          ⭐ Empresa Premium
+        </div>
+      ` : ''}
+
     `;
 
     document.getElementById('socios').innerHTML =
       data.socios?.length
         ? data.socios.map(s => `
-            <div class="socio-item">
-              <div class="socio-nome">
-                <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
-                ${s.nome || '-'}
-              </div>
-              <div class="socio-qual">
-                Qualificação: ${s.qualificacao_socio?.descricao || '-'}
-              </div>
+
+            <div class="socio">
+
+              <strong>${s.nome || '-'}</strong>
+
+              <br><br>
+
+              ${s.qualificacao_socio?.descricao || '-'}
+
             </div>
+
           `).join('')
-        : '<span style="color:var(--color-pewter)">Nenhum sócio encontrado na base.</span>';
+        : 'Nenhum sócio encontrado.';
   }
 
-  function imprimirPDF() {
-    if (document.getElementById('result').style.display === 'none') {
-      showError('Faça uma consulta antes de gerar o PDF.');
+  function copiarTexto(texto) {
+
+    navigator.clipboard.writeText(texto);
+
+    alert('Copiado com sucesso!');
+  }
+
+  function exportarJSON() {
+
+    if (!ultimoResultado) {
+      showError('Faça uma consulta antes.');
       return;
     }
-    window.print();
+
+    const blob = new Blob(
+      [JSON.stringify(ultimoResultado, null, 2)],
+      { type: 'application/json' }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.download = 'empresa.json';
+
+    a.click();
   }
+
+  renderizarHistorico();
+
 </script>
 
 </body>
 </html>
+```
