@@ -1,51 +1,51 @@
-# Página Completa — Consulta Inteligente de CNPJ Premium
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Consulta Inteligente de CNPJ Premium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Consulta Inteligente de CNPJ</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+    rel="stylesheet">
 
-  <link
-    rel="stylesheet"
+  <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-  />
+    referrerpolicy="no-referrer" />
 
   <style>
-
     :root {
       --bg: #f4f6fb;
-      --card: rgba(255,255,255,.88);
+      --card: #ffffff;
       --text: #111827;
       --muted: #6b7280;
-      --primary: #ff5500;
-      --secondary: #ff2d7b;
-      --blue: #0066ff;
-      --green: #00c853;
-      --purple: #7b2dff;
-      --border: rgba(0,0,0,.06);
-      --shadow: 0 10px 40px rgba(0,0,0,.08);
-      --gradient:
-        linear-gradient(135deg,#ff5500 0%,#ff2d7b 50%,#ffaa00 100%);
-    }
 
-    body.dark {
-      --bg: #09090f;
-      --card: rgba(18,18,28,.88);
-      --text: #f4f4f5;
-      --muted: #9ca3af;
-      --border: rgba(255,255,255,.06);
-      --shadow: 0 10px 40px rgba(0,0,0,.45);
+      --gradient-primary:
+        linear-gradient(135deg, #ff5500 0%, #ff2d7b 50%, #7b2dff 100%);
+
+      --gradient-blue:
+        linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+
+      --gradient-green:
+        linear-gradient(135deg, #00c853 0%, #00e676 100%);
+
+      --gradient-orange:
+        linear-gradient(135deg, #ff7a00 0%, #ffb800 100%);
+
+      --gradient-purple:
+        linear-gradient(135deg, #7b2dff 0%, #d916ff 100%);
+
+      --shadow:
+        0 12px 40px rgba(0, 0, 0, .08);
+
+      --radius: 24px;
+
+      --font: 'Inter', sans-serif;
     }
 
     * {
@@ -56,15 +56,14 @@
 
     body {
       background:
-        radial-gradient(circle at top left, rgba(255,85,0,.15), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(0,102,255,.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(255, 85, 0, .10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(123, 45, 255, .10), transparent 30%),
         var(--bg);
 
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font);
       color: var(--text);
       min-height: 100vh;
-      padding: 40px;
-      transition: .3s;
+      padding: 30px;
     }
 
     .container {
@@ -73,182 +72,235 @@
     }
 
     .main-card {
-      background: var(--card);
-      backdrop-filter: blur(18px);
-      border-radius: 30px;
+      background: rgba(255, 255, 255, .85);
+      border-radius: 32px;
       overflow: hidden;
+      backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
-      border: 1px solid var(--border);
     }
 
     .top {
       padding: 50px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-      gap: 20px;
     }
 
     .logo {
-      width: 74px;
-      height: 74px;
-      border-radius: 20px;
-      background: var(--gradient);
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
+      font-size: 22px;
       font-weight: 800;
-      font-size: 20px;
-    }
-
-    .theme-toggle {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      border: none;
-      background: var(--gradient);
-      color: white;
-      cursor: pointer;
-      font-size: 18px;
+      margin-bottom: 25px;
+      box-shadow: 0 14px 30px rgba(255, 85, 0, .25);
     }
 
     h1 {
-      font-size: 46px;
-      margin-bottom: 14px;
-      line-height: 52px;
+      font-size: 52px;
+      line-height: 1.1;
+      margin-bottom: 15px;
+      font-weight: 800;
     }
 
     .subtitle {
-      max-width: 760px;
       color: var(--muted);
-      line-height: 28px;
-      font-size: 16px;
+      font-size: 17px;
+      max-width: 780px;
+      line-height: 1.7;
     }
 
     .search-area {
       display: flex;
-      gap: 16px;
-      margin-top: 34px;
+      gap: 15px;
+      margin-top: 35px;
       flex-wrap: wrap;
     }
 
     .input-wrapper {
-      position: relative;
       flex: 1;
-      min-width: 300px;
-    }
-
-    .input-wrapper i {
-      position: absolute;
-      left: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary);
+      position: relative;
+      min-width: 280px;
     }
 
     .input-wrapper input {
       width: 100%;
-      height: 66px;
-      border-radius: 100px;
-      border: 2px solid var(--border);
-      background: rgba(255,255,255,.9);
-      padding: 0 24px 0 56px;
+      height: 68px;
+      border-radius: 999px;
+      border: 2px solid #e5e7eb;
+      padding: 0 25px 0 60px;
       font-size: 16px;
       outline: none;
+      transition: .3s;
+      background: white;
     }
 
-    body.dark .input-wrapper input {
-      background: rgba(255,255,255,.05);
-      color: white;
+    .input-wrapper input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, .12);
+    }
+
+    .icon {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ff5500;
+      font-size: 18px;
     }
 
     button {
-      height: 66px;
+      height: 68px;
       border: none;
-      border-radius: 100px;
-      padding: 0 28px;
-      cursor: pointer;
+      border-radius: 999px;
+      padding: 0 30px;
       font-weight: 700;
       font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      cursor: pointer;
+      transition: .3s;
     }
 
     #btnConsultar {
-      background: var(--gradient);
+      background: var(--gradient-primary);
       color: white;
+      box-shadow: 0 12px 24px rgba(255, 85, 0, .20);
+    }
+
+    #btnConsultar:hover {
+      transform: translateY(-3px);
     }
 
     .secondary-btn {
-      background: transparent;
-      border: 2px solid var(--border);
-      color: var(--text);
+      background: white;
+      border: 2px solid #e5e7eb;
+    }
+
+    .secondary-btn:hover {
+      border-color: #2563eb;
+      color: #2563eb;
     }
 
     .loading {
       display: none;
+      text-align: center;
       padding: 60px;
     }
 
-    .skeleton {
-      height: 22px;
-      border-radius: 8px;
-      background: linear-gradient(
-        90deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.2),
-        rgba(255,255,255,.08)
-      );
-      background-size: 300% 100%;
-      animation: shimmer 1.2s infinite;
-      margin-bottom: 14px;
+    .loader {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 5px solid #eee;
+      border-top-color: #ff5500;
+      margin: auto auto 20px;
+      animation: spin .7s linear infinite;
     }
 
-    @keyframes shimmer {
-      0% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .error {
       display: none;
-      margin: 30px;
+      margin: 20px;
+      background: #ffe8e8;
+      border: 1px solid #ffb6b6;
+      color: #d70000;
       padding: 20px;
       border-radius: 18px;
-      background: rgba(255,45,85,.12);
-      color: #ff2d55;
       font-weight: 600;
     }
 
     .result {
       display: none;
-      padding: 40px;
+      padding: 35px;
     }
 
-    .banner {
-      background:
-        linear-gradient(135deg,#09090f 0%,#12122c 50%,#003b7a 100%);
-      color: white;
-      padding: 40px;
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
       border-radius: 28px;
-      margin-bottom: 30px;
+      padding: 26px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      min-height: 120px;
+      box-shadow: var(--shadow);
     }
 
-    .banner h2 {
-      font-size: 38px;
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 50%;
+      right: -70px;
+      top: -70px;
+    }
+
+    .stat-card .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      opacity: .9;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.9);
+    }
+
+    .stat-card .value {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .card-purple {
+      background: var(--gradient-purple);
+    }
+
+    .card-blue {
+      background: var(--gradient-blue);
+    }
+
+    .card-orange {
+      background: var(--gradient-orange);
+    }
+
+    .card-green {
+      background: var(--gradient-green);
+    }
+
+    .company-banner {
+      background:
+        linear-gradient(135deg,
+          #0f172a 0%,
+          #111827 45%,
+          #1e293b 100%);
+      color: white;
+      border-radius: 32px;
+      padding: 45px;
+      margin-bottom: 28px;
+    }
+
+    .company-banner h2 {
+      font-size: 42px;
       margin-bottom: 10px;
     }
 
-    .banner p {
-      opacity: .7;
-      margin-bottom: 24px;
+    .company-banner p {
+      color: rgba(255,255,255,.7);
+      font-size: 16px;
+      margin-bottom: 20px;
     }
 
     .badges {
@@ -259,324 +311,515 @@
 
     .badge {
       padding: 10px 18px;
-      border-radius: 100px;
+      border-radius: 999px;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .success {
-      background: rgba(0,200,83,.18);
-      color: #00ff8c;
+    .badge-success {
+      background: rgba(0, 230, 118, .18);
+      color: #00ff88;
     }
 
-    .danger {
-      background: rgba(255,45,85,.18);
-      color: #ff7b96;
+    .badge-blue {
+      background: rgba(0, 102, 255, .18);
+      color: #4da6ff;
     }
 
-    .blue {
-      background: rgba(0,102,255,.18);
-      color: #6fb1ff;
+    .badge-purple {
+      background: rgba(217, 22, 255, .18);
+      color: #f18cff;
     }
 
-    .purple {
-      background: rgba(123,45,255,.18);
-      color: #b799ff;
-    }
-
-    .stats {
+    .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap: 18px;
-      margin-bottom: 26px;
-    }
-
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 22px;
-    }
-
-    .stat small {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .stat strong {
-      font-size: 18px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 24px;
-      transition: .3s;
+    .info-card {
+      border-radius: 28px;
+      padding: 28px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    .info-card::before {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+      right: -50px;
+      top: -50px;
     }
 
-    .card.full {
+    .info-card:nth-child(1) {
+      background: var(--gradient-purple);
+    }
+
+    .info-card:nth-child(2) {
+      background: var(--gradient-green);
+    }
+
+    .info-card:nth-child(3) {
+      background: var(--gradient-blue);
+    }
+
+    .info-card:nth-child(4) {
+      background: var(--gradient-orange);
+    }
+
+    .info-card:nth-child(5) {
+      background: linear-gradient(135deg, #ec4899, #ff2d7b);
+    }
+
+    .info-card:nth-child(6) {
+      background: linear-gradient(135deg, #06b6d4, #14b8a6);
+    }
+
+    .info-card:nth-child(7) {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    }
+
+    .info-card:nth-child(8) {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .full {
       grid-column: 1 / -1;
     }
 
     .label {
       font-size: 12px;
+      text-transform: uppercase;
       font-weight: 800;
       letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,.85);
     }
 
     .value {
-      line-height: 1.7;
-      font-weight: 600;
-      word-break: break-word;
-    }
-
-    .socio {
-      background: rgba(255,255,255,.04);
-      border-left: 4px solid var(--blue);
-      padding: 16px;
-      border-radius: 14px;
-      margin-bottom: 12px;
-    }
-
-    .history {
-      margin-top: 30px;
-    }
-
-    .history h3 {
-      margin-bottom: 16px;
-    }
-
-    .history-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .history-item {
-      padding: 10px 16px;
-      border-radius: 100px;
-      background: rgba(255,255,255,.08);
-      cursor: pointer;
-      border: 1px solid var(--border);
-    }
-
-    a.map-link {
-      color: var(--blue);
-      text-decoration: none;
+      font-size: 18px;
       font-weight: 700;
+      line-height: 1.7;
+      color: white;
     }
 
-    @media(max-width:768px){
+    .socio-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid #00d4ff;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .socio-nome {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .socio-qual {
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* =========================
+       PDF
+    ========================= */
+
+    @media print {
 
       body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        color: #000 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+
+      .top,
+      .search-area,
+      .loading,
+      .footer,
+      #btnConsultar,
+      #btnPDF,
+      .logo {
+        display: none !important;
+      }
+
+      .main-card {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+      }
+
+      .result {
+        display: block !important;
+        padding: 25px !important;
+      }
+
+      .result::before {
+        content:
+          "RELATÓRIO DE EMPRESA\A\A CONSULTA COMPLETA DE CNPJ";
+        white-space: pre;
+        display: block;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #111;
+        border-bottom: 4px solid #d91e18;
+        padding-bottom: 20px;
+      }
+
+      .result::after {
+        content:
+          "Gerado em: " attr(data-gerado);
+        display: block;
+        text-align: center;
+        margin-top: -10px;
+        margin-bottom: 25px;
+        color: #666;
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .stats-bar {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0 !important;
+        margin-bottom: 30px !important;
+        border: 2px solid #d91e18;
+      }
+
+      .stats-bar::before {
+        content: "RESUMO ESTATÍSTICO";
+        grid-column: 1 / -1;
+        background: #fff;
+        color: #666;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 12px;
+        border-bottom: 2px solid #d91e18;
+      }
+
+      .stat-card {
+        border-radius: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        border-right: 2px solid #d91e18;
+        padding: 0 !important;
+        min-height: auto !important;
+        color: #000 !important;
+      }
+
+      .stat-card:last-child {
+        border-right: none;
+      }
+
+      .stat-card::before {
+        display: none !important;
+      }
+
+      .stat-card .label {
+        background: #d91e18 !important;
+        color: #fff !important;
+        text-align: center;
+        padding: 12px;
+        margin: 0 !important;
+        font-size: 14px !important;
+        border-bottom: 2px solid #d91e18;
+      }
+
+      .stat-card .value {
+        color: #111 !important;
+        text-align: center;
+        font-size: 18px !important;
         padding: 14px;
+        font-weight: 700;
+      }
+
+      .company-banner {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #d91e18 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 25px !important;
+      }
+
+      .company-banner h2 {
+        background: #d91e18;
+        color: #fff !important;
+        text-align: center;
+        font-size: 18px !important;
+        margin: 0 !important;
+        padding: 14px;
+      }
+
+      .company-banner p {
+        color: #111 !important;
+        text-align: center;
+        padding: 15px;
+        margin: 0 !important;
+        font-size: 15px !important;
+      }
+
+      .badges {
+        justify-content: center;
+        padding-bottom: 15px;
+      }
+
+      .badge {
+        border: 1px solid #d91e18 !important;
+        background: #fff !important;
+        color: #d91e18 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      .info-grid {
+        display: block !important;
+      }
+
+      .info-card {
+        background: #fff !important;
+        color: #111 !important;
+        border-radius: 0 !important;
+        border: 2px solid #d91e18 !important;
+        box-shadow: none !important;
+        margin-bottom: 18px !important;
+        padding: 0 !important;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .info-card::before {
+        display: none !important;
+      }
+
+      .info-card .label {
+        background: #d91e18 !important;
+        color: #fff !important;
+        padding: 12px 16px !important;
+        margin: 0 !important;
+        font-size: 14px !important;
+      }
+
+      .info-card .value {
+        color: #111 !important;
+        padding: 16px !important;
+        font-size: 14px !important;
+        line-height: 1.7 !important;
+      }
+
+      .socio-item {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        border-left: 4px solid #d91e18 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin-bottom: 10px !important;
+      }
+
+      .socio-nome {
+        color: #111 !important;
+      }
+
+      .socio-qual {
+        color: #444 !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media(max-width:768px) {
+      body {
+        padding: 12px;
       }
 
       .top,
       .result {
-        padding: 24px;
+        padding: 22px;
       }
 
       h1 {
         font-size: 34px;
-        line-height: 40px;
       }
 
       button {
         width: 100%;
-        justify-content: center;
+      }
+
+      .company-banner h2 {
+        font-size: 28px;
       }
     }
-
   </style>
 </head>
+
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="main-card">
+    <div class="main-card">
 
-    <div class="top">
-
-      <div class="topbar">
+      <div class="top">
 
         <div class="logo">CNPJ</div>
 
-        <button class="theme-toggle" id="toggleTheme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
+        <h1>Consulta Inteligente de Empresas</h1>
 
-      </div>
+        <p class="subtitle">
+          Plataforma corporativa moderna para consulta empresarial completa via CNPJ.
+          Dados atualizados em tempo real da Receita Federal.
+        </p>
 
-      <h1>Consulta Inteligente de Empresas</h1>
+        <div class="search-area">
 
-      <p class="subtitle">
-        Plataforma corporativa premium para consultas empresariais em tempo real.
-      </p>
+          <div class="input-wrapper">
 
-      <div class="search-area">
+            <span class="icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
 
-        <div class="input-wrapper">
+            <input
+              type="text"
+              id="cnpj"
+              placeholder="Digite o CNPJ — ex: 00.000.000/0001-00"
+              maxlength="18" />
 
-          <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
 
-          <input
-            type="text"
-            id="cnpj"
-            placeholder="Digite o CNPJ"
-            maxlength="18"
-          />
+          <button id="btnConsultar">
+            <i class="fa-solid fa-rocket"></i>
+            Consultar Empresa
+          </button>
 
-        </div>
+          <button id="btnPDF" class="secondary-btn">
+            <i class="fa-solid fa-file-pdf"></i>
+            Gerar PDF
+          </button>
 
-        <button id="btnConsultar">
-          <i class="fa-solid fa-rocket"></i>
-          Consultar
-        </button>
-
-        <button class="secondary-btn" id="btnPDF">
-          <i class="fa-solid fa-file-pdf"></i>
-          PDF
-        </button>
-
-        <button class="secondary-btn" id="btnJSON">
-          <i class="fa-solid fa-code"></i>
-          JSON
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="loading" id="loading">
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-    </div>
-
-    <div class="error" id="error"></div>
-
-    <div class="result" id="result">
-
-      <div class="stats">
-
-        <div class="stat">
-          <small>Porte</small>
-          <strong id="statPorte">-</strong>
-        </div>
-
-        <div class="stat">
-          <small>UF</small>
-          <strong id="statUF">-</strong>
-        </div>
-
-        <div class="stat">
-          <small>Abertura</small>
-          <strong id="statAbertura">-</strong>
-        </div>
-
-        <div class="stat">
-          <small>Capital</small>
-          <strong id="statCapital">-</strong>
         </div>
 
       </div>
 
-      <div class="banner">
+      <div class="loading" id="loading">
 
-        <h2 id="razaoSocial">-</h2>
+        <div class="loader"></div>
 
-        <p id="nomeFantasia">-</p>
-
-        <div class="badges" id="badges"></div>
+        <h3>Consultando empresa...</h3>
 
       </div>
 
-      <div class="grid">
+      <div class="error" id="error"></div>
 
-        <div class="card">
-          <div class="label">CNPJ</div>
-          <div class="value" id="cnpjInfo"></div>
+      <div class="result" id="result">
+
+        <div class="stats-bar">
+
+          <div class="stat-card card-purple">
+            <div class="label">Capital Social</div>
+            <div class="value" id="statCapital">-</div>
+          </div>
+
+          <div class="stat-card card-green">
+            <div class="label">Natureza Jurídica</div>
+            <div class="value" id="naturezaJuridica">-</div>
+          </div>
+
+          <div class="stat-card card-orange">
+            <div class="label">Porte da Empresa</div>
+            <div class="value" id="porteEmpresa">-</div>
+          </div>
+
+          <div class="stat-card card-blue">
+            <div class="label">Data de Abertura</div>
+            <div class="value" id="dataAbertura">-</div>
+          </div>
+
         </div>
 
-        <div class="card">
-          <div class="label">Situação</div>
-          <div class="value" id="situacao"></div>
+        <div class="company-banner">
+
+          <h2 id="razaoSocial">-</h2>
+
+          <p id="nomeFantasia">-</p>
+
+          <div class="badges" id="badges"></div>
+
         </div>
 
-        <div class="card">
-          <div class="label">Telefone</div>
-          <div class="value" id="telefone"></div>
+        <div class="info-grid">
+
+          <div class="info-card">
+            <div class="label">CNPJ</div>
+            <div class="value" id="cnpjInfo"></div>
+          </div>
+
+          <div class="info-card">
+            <div class="label">Situação Cadastral</div>
+            <div class="value" id="situacao"></div>
+          </div>
+
+          <div class="info-card">
+            <div class="label">Telefone</div>
+            <div class="value" id="telefone"></div>
+          </div>
+
+          <div class="info-card">
+            <div class="label">E-mail</div>
+            <div class="value" id="email"></div>
+          </div>
+
+          <div class="info-card">
+            <div class="label">CNAE Principal</div>
+            <div class="value" id="cnaePrincipal"></div>
+          </div>
+
+          <div class="info-card full">
+            <div class="label">CNAEs Secundários</div>
+            <div class="value" id="cnaesSecundarios"></div>
+          </div>
+
+          <div class="info-card full">
+            <div class="label">Endereço Completo</div>
+            <div class="value" id="endereco"></div>
+          </div>
+
+          <div class="info-card full">
+            <div class="label">Quadro Societário</div>
+            <div class="value" id="socios"></div>
+          </div>
+
         </div>
 
-        <div class="card">
-          <div class="label">E-mail</div>
-          <div class="value" id="email"></div>
+        <div class="footer">
+          Sistema interno corporativo • Consulta via API pública CNPJ WS
         </div>
-
-        <div class="card">
-          <div class="label">Capital Social</div>
-          <div class="value" id="capitalSocial"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Natureza Jurídica</div>
-          <div class="value" id="naturezaJuridica"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">CNAE Principal</div>
-          <div class="value" id="cnaePrincipal"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Tempo de Empresa</div>
-          <div class="value" id="tempoEmpresa"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Data de Abertura</div>
-          <div class="value" id="dataAbertura"></div>
-        </div>
-
-        <div class="card full">
-          <div class="label">Endereço</div>
-          <div class="value" id="endereco"></div>
-        </div>
-
-        <div class="card full">
-          <div class="label">CNAEs Secundários</div>
-          <div class="value" id="cnaesSecundarios"></div>
-        </div>
-
-        <div class="card full">
-          <div class="label">Quadro Societário</div>
-          <div class="value" id="socios"></div>
-        </div>
-
-      </div>
-
-      <div class="history">
-
-        <h3>Últimas Consultas</h3>
-
-        <div class="history-list" id="historyList"></div>
 
       </div>
 
@@ -584,341 +827,274 @@
 
   </div>
 
-</div>
+  <script>
 
-<script>
+    const input =
+      document.getElementById('cnpj');
 
-  const input = document.getElementById('cnpj');
-  const btnConsultar = document.getElementById('btnConsultar');
-  const btnPDF = document.getElementById('btnPDF');
-  const btnJSON = document.getElementById('btnJSON');
-  const toggleTheme = document.getElementById('toggleTheme');
+    const button =
+      document.getElementById('btnConsultar');
 
-  let ultimoResultado = null;
+    const btnPDF =
+      document.getElementById('btnPDF');
 
-  toggleTheme.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-  });
+    input.addEventListener('input', (e) => {
 
-  input.addEventListener('input', (e) => {
+      let v =
+        e.target.value.replace(/\D/g, '');
 
-    let v = e.target.value.replace(/\D/g, '');
+      v =
+        v.replace(/^(\d{2})(\d)/, '$1.$2');
 
-    v = v.replace(/^(\d{2})(\d)/, '$1.$2');
-    v = v.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-    v = v.replace(/\.(\d{3})(\d)/, '.$1/$2');
-    v = v.replace(/(\d{4})(\d)/, '$1-$2');
+      v =
+        v.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
 
-    e.target.value = v;
+      v =
+        v.replace(/\.(\d{3})(\d)/, '.$1/$2');
 
-    if (v.replace(/\D/g, '').length === 14) {
-      consultarCNPJ();
-    }
-  });
+      v =
+        v.replace(/(\d{4})(\d)/, '$1-$2');
 
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') consultarCNPJ();
-  });
+      e.target.value = v;
+    });
 
-  btnConsultar.addEventListener('click', consultarCNPJ);
+    input.addEventListener('keydown', (e) => {
 
-  btnPDF.addEventListener('click', () => {
-    window.print();
-  });
-
-  btnJSON.addEventListener('click', exportarJSON);
-
-  function showError(msg) {
-
-    const error = document.getElementById('error');
-
-    error.style.display = 'block';
-
-    error.innerHTML = `
-      <i class="fa-solid fa-circle-exclamation"></i>
-      ${msg}
-    `;
-  }
-
-  function hideError() {
-    document.getElementById('error').style.display = 'none';
-  }
-
-  function formatarData(data) {
-
-    if (!data) return '-';
-
-    const partes = data.split('-');
-
-    if (partes.length !== 3) return data;
-
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
-  }
-
-  function calcularTempoEmpresa(data) {
-
-    if (!data) return '-';
-
-    const abertura = new Date(data);
-    const hoje = new Date();
-
-    return `${hoje.getFullYear() - abertura.getFullYear()} anos`;
-  }
-
-  function salvarHistorico(cnpj) {
-
-    let lista = JSON.parse(localStorage.getItem('historicoCNPJ')) || [];
-
-    lista = lista.filter(item => item !== cnpj);
-
-    lista.unshift(cnpj);
-
-    lista = lista.slice(0, 10);
-
-    localStorage.setItem('historicoCNPJ', JSON.stringify(lista));
-
-    renderizarHistorico();
-  }
-
-  function renderizarHistorico() {
-
-    const lista = JSON.parse(localStorage.getItem('historicoCNPJ')) || [];
-
-    document.getElementById('historyList').innerHTML =
-      lista.map(cnpj => `
-
-        <div class="history-item" onclick="consultarHistorico('${cnpj}')">
-          ${cnpj}
-        </div>
-
-      `).join('');
-  }
-
-  function consultarHistorico(cnpj) {
-    input.value = cnpj;
-    consultarCNPJ();
-  }
-
-  async function consultarCNPJ() {
-
-    hideError();
-
-    const loading = document.getElementById('loading');
-    const result = document.getElementById('result');
-
-    let cnpj = input.value.replace(/\D/g, '');
-
-    if (cnpj.length !== 14) {
-      showError('Digite um CNPJ válido.');
-      return;
-    }
-
-    loading.style.display = 'block';
-    result.style.display = 'none';
-
-    try {
-
-      const response = await fetch(
-        `https://publica.cnpj.ws/cnpj/${cnpj}`
-      );
-
-      if (!response.ok) {
-        throw new Error('Erro ao consultar empresa.');
+      if (e.key === 'Enter') {
+        consultarCNPJ();
       }
 
-      const data = await response.json();
+    });
 
-      ultimoResultado = data;
+    button.addEventListener('click', consultarCNPJ);
 
-      preencherDados(data);
+    function showError(msg) {
 
-      salvarHistorico(cnpj);
+      const el =
+        document.getElementById('error');
 
-      result.style.display = 'block';
+      el.style.display = 'block';
 
-    } catch (err) {
-
-      showError(err.message);
-
-    } finally {
-
-      loading.style.display = 'none';
+      el.innerHTML =
+        `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`;
     }
-  }
 
-  function preencherDados(data) {
+    function hideError() {
 
-    const est = data.estabelecimento || {};
+      document.getElementById('error').style.display = 'none';
+    }
 
-    const dataFormatada = formatarData(est.data_inicio_atividade);
+    function formatarData(data) {
 
-    const tempoEmpresa = calcularTempoEmpresa(est.data_inicio_atividade);
+      if (!data) return '-';
 
-    document.getElementById('razaoSocial').innerText =
-      data.razao_social || '-';
+      const partes = data.split('-');
 
-    document.getElementById('nomeFantasia').innerText =
-      est.nome_fantasia || 'Nome fantasia não informado';
+      if (partes.length === 3) {
+        return `${partes[2]}/${partes[1]}/${partes[0]}`;
+      }
 
-    document.getElementById('cnpjInfo').innerHTML = `
-      ${est.cnpj || '-'}
-      <br><br>
-      <button onclick="copiarTexto('${est.cnpj || ''}')">
-        Copiar
-      </button>
-    `;
+      return data;
+    }
 
-    document.getElementById('situacao').innerText =
-      est.situacao_cadastral || '-';
+    async function consultarCNPJ() {
 
-    document.getElementById('telefone').innerHTML = `
-      ${est.telefone1 || '-'}
-      <br><br>
-      <button onclick="copiarTexto('${est.telefone1 || ''}')">
-        Copiar
-      </button>
-    `;
+      hideError();
 
-    document.getElementById('email').innerText =
-      est.email || '-';
+      const loading =
+        document.getElementById('loading');
 
-    const capital = data.capital_social
-      ? `R$ ${Number(data.capital_social).toLocaleString('pt-BR', {
-          minimumFractionDigits: 2
-        })}`
-      : '-';
+      const result =
+        document.getElementById('result');
 
-    document.getElementById('capitalSocial').innerText = capital;
+      result.style.display = 'none';
 
-    document.getElementById('naturezaJuridica').innerText =
-      data.natureza_juridica?.descricao || '-';
+      let cnpj =
+        input.value.replace(/\D/g, '');
 
-    document.getElementById('cnaePrincipal').innerText =
-      est.atividade_principal
-        ? `${est.atividade_principal.id} - ${est.atividade_principal.descricao}`
-        : '-';
+      if (cnpj.length !== 14) {
 
-    document.getElementById('tempoEmpresa').innerText = tempoEmpresa;
+        showError('Digite um CNPJ válido.');
 
-    document.getElementById('dataAbertura').innerText = dataFormatada;
+        return;
+      }
 
-    const enderecoCompleto = `
-      ${est.tipo_logradouro || ''} ${est.logradouro || ''},
-      ${est.numero || 'S/N'} - ${est.bairro || ''}
-      - ${est.cidade?.nome || ''}/${est.estado?.sigla || ''}
-    `;
+      loading.style.display = 'block';
 
-    document.getElementById('endereco').innerHTML = `
+      button.disabled = true;
 
-      <a
-        class="map-link"
-        href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoCompleto)}"
-        target="_blank"
-      >
-        ${enderecoCompleto}
-      </a>
+      try {
 
-    `;
+        const res =
+          await fetch(`https://publica.cnpj.ws/cnpj/${cnpj}`);
 
-    document.getElementById('cnaesSecundarios').innerHTML =
-      est.atividades_secundarias?.length
-        ? est.atividades_secundarias.map(cnae => `
-            <div style="margin-bottom:10px">
-              ${cnae.id} - ${cnae.descricao}
-            </div>
-          `).join('')
-        : '-';
+        if (!res.ok) {
+          throw new Error('Erro ao consultar empresa.');
+        }
 
-    document.getElementById('statPorte').innerText =
-      data.porte?.descricao || '-';
+        const data =
+          await res.json();
 
-    document.getElementById('statUF').innerText =
-      est.estado?.sigla || '-';
+        preencherDados(data);
 
-    document.getElementById('statAbertura').innerText =
-      dataFormatada;
+        result.style.display = 'block';
 
-    document.getElementById('statCapital').innerText = capital;
+      } catch (err) {
 
-    const ativo =
-      est.situacao_cadastral?.toLowerCase().includes('ativa');
+        showError(err.message);
 
-    const premium =
-      data.capital_social > 1000000;
+      } finally {
 
-    document.getElementById('badges').innerHTML = `
+        loading.style.display = 'none';
 
-      <div class="badge ${ativo ? 'success' : 'danger'}">
-        ${est.situacao_cadastral || '-'}
-      </div>
+        button.disabled = false;
+      }
+    }
 
-      <div class="badge blue">
-        ${est.estado?.sigla || '--'}
-      </div>
+    function preencherDados(data) {
 
-      <div class="badge purple">
-        ${data.porte?.descricao || '-'}
-      </div>
+      const est =
+        data.estabelecimento || {};
 
-      ${premium ? `
-        <div class="badge success">
-          ⭐ Empresa Premium
+      document.getElementById('razaoSocial').innerText =
+        data.razao_social || '-';
+
+      document.getElementById('nomeFantasia').innerText =
+        est.nome_fantasia || 'Nome fantasia não informado';
+
+      document.getElementById('cnpjInfo').innerText =
+        est.cnpj || '-';
+
+      document.getElementById('situacao').innerText =
+        est.situacao_cadastral || '-';
+
+      document.getElementById('telefone').innerText =
+        est.telefone1 || '-';
+
+      document.getElementById('email').innerText =
+        est.email || '-';
+
+      const capital =
+        data.capital_social
+          ? `R$ ${Number(data.capital_social).toLocaleString('pt-BR', {
+              minimumFractionDigits: 2
+            })}`
+          : 'R$ 0,00';
+
+      document.getElementById('statCapital').innerText =
+        capital;
+
+      document.getElementById('naturezaJuridica').innerText =
+        data.natureza_juridica?.descricao || '-';
+
+      document.getElementById('porteEmpresa').innerText =
+        data.porte?.descricao || '-';
+
+      document.getElementById('dataAbertura').innerText =
+        formatarData(est.data_inicio_atividade);
+
+      document.getElementById('cnaePrincipal').innerHTML =
+        est.atividade_principal
+          ? `${est.atividade_principal.id} - ${est.atividade_principal.descricao}`
+          : '-';
+
+      document.getElementById('cnaesSecundarios').innerHTML =
+        est.atividades_secundarias?.length
+          ? est.atividades_secundarias.map(c =>
+              `${c.id} - ${c.descricao}`
+            ).join('<br><br>')
+          : 'Nenhum CNAE secundário informado';
+
+      document.getElementById('endereco').innerHTML =
+        `
+          ${est.tipo_logradouro || ''} ${est.logradouro || ''},
+          ${est.numero || 'S/N'}
+          <br><br>
+          ${est.bairro || ''}
+          <br><br>
+          ${est.cidade?.nome || ''} / ${est.estado?.sigla || ''}
+          <br><br>
+          CEP: ${est.cep || ''}
+        `;
+
+      document.getElementById('badges').innerHTML = `
+        <div class="badge badge-success">
+          ${est.situacao_cadastral || '-'}
         </div>
-      ` : ''}
 
-    `;
+        <div class="badge badge-blue">
+          ${est.estado?.sigla || '--'}
+        </div>
 
-    document.getElementById('socios').innerHTML =
-      data.socios?.length
-        ? data.socios.map(s => `
+        <div class="badge badge-purple">
+          ${data.porte?.descricao || '-'}
+        </div>
+      `;
 
-            <div class="socio">
+      document.getElementById('socios').innerHTML =
+        data.socios?.length
+          ? data.socios.map(s => `
+            <div class="socio-item">
 
-              <strong>${s.nome || '-'}</strong>
+              <div class="socio-nome">
+                ${s.nome || '-'}
+              </div>
 
-              <br><br>
-
-              ${s.qualificacao_socio?.descricao || '-'}
+              <div class="socio-qual">
+                ${s.qualificacao_socio?.descricao || 'Qualificação não informada'}
+              </div>
 
             </div>
-
           `).join('')
-        : 'Nenhum sócio encontrado.';
-  }
-
-  function copiarTexto(texto) {
-
-    navigator.clipboard.writeText(texto);
-
-    alert('Copiado com sucesso!');
-  }
-
-  function exportarJSON() {
-
-    if (!ultimoResultado) {
-      showError('Faça uma consulta antes.');
-      return;
+          : `
+            <div class="socio-item">
+              <div class="socio-qual">
+                Nenhum sócio encontrado na base da Receita Federal.
+              </div>
+            </div>
+          `;
     }
 
-    const blob = new Blob(
-      [JSON.stringify(ultimoResultado, null, 2)],
-      { type: 'application/json' }
-    );
+    function gerarDataHoraPDF() {
 
-    const url = URL.createObjectURL(blob);
+      const agora = new Date();
 
-    const a = document.createElement('a');
+      const dia =
+        String(agora.getDate()).padStart(2, '0');
 
-    a.href = url;
-    a.download = 'empresa.json';
+      const mes =
+        String(agora.getMonth() + 1).padStart(2, '0');
 
-    a.click();
-  }
+      const ano =
+        agora.getFullYear();
 
-  renderizarHistorico();
+      const hora =
+        String(agora.getHours()).padStart(2, '0');
 
-</script>
+      const minuto =
+        String(agora.getMinutes()).padStart(2, '0');
+
+      const segundo =
+        String(agora.getSeconds()).padStart(2, '0');
+
+      return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+    }
+
+    btnPDF.addEventListener('click', () => {
+
+      const result =
+        document.getElementById('result');
+
+      result.setAttribute(
+        'data-gerado',
+        gerarDataHoraPDF()
+      );
+
+      window.print();
+    });
+
+  </script>
 
 </body>
+
 </html>
-```
