@@ -499,7 +499,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ## 👤 Autor
 
-Desenvolvido com 🔥 por **[Seu Nome](https://github.com/seu-usuario)**
+Desenvolvido com 🔥 por **[Fabricio Barbosa](https://github.com/lupin80)**
 
 ---
 
